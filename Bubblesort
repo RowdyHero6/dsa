@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+struct student
+{
+    int rollno;
+    char name[20];
+    float SGPA;
+};
+
+void accept(struct student list[5]);
+void display(struct student list[5]);
+void bubblesort(struct student list[5]);
+
+int main()
+{
+    struct student data[5];
+    accept(data);
+    cout << "Before Bubble Sort (by Roll Number):\n";
+    display(data);
+    bubblesort(data);
+    cout << "\nAfter Bubble Sort (by Roll Number):\n";
+    display(data);
+    
+    return 0;
+}
+
+void accept(struct student list[5])
+{
+    for (int i = 0; i < 5; i++)
+    {
+        cout<<"Enter roll no., name and SGPA for student: ";
+        cin>>list[i].rollno>>list[i].name>>list[i].SGPA;
+    }
+}
+
+void display(struct student list[5])
+{
+    cout << "\nRollno.\tName\t\t\tSGPA\n";
+    for (int i = 0; i < 5; i++)
+    {
+        cout<<list[i].rollno<<"\t"<<list[i].name<<"\t"<<list[i].SGPA<<"\n";
+    }
+}
+
+void bubblesort(struct student list[5])
+{
+    struct student temp;
+    for(int i = 0;i<5-1;i++)
+    {
+        for(int j=0;j<5-1-i;j++)
+        {
+            if (list[j].rollno>list[j+1].rollno)
+            {
+                temp=list[j];
+                list[j]=list[j+1];
+                list[j+1]=temp;
+            }
+        }
+    }
+}
