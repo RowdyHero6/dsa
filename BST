@@ -1,0 +1,89 @@
+#include<iostream> 
+#include<stdlib.h> 
+using namespace std; 
+struct node 
+{ 
+    int key; 
+    struct node *left, *right; 
+};
+struct node *newNode(int item) 
+{ 
+    struct node *temp = (struct node *)malloc(sizeof(struct node)); 
+    temp->key = item; 
+    temp->left = temp->right = NULL; 
+    return temp; 
+}    
+void search(struct node *root) 
+{ 
+    int data; 
+    node *temp = new node; 
+    temp = root; 
+    cout<<"\nEnter the elements to be searched: "; 
+    cin>>data; 
+    while(temp != NULL)
+    { 
+        if(temp->key == data) 
+        {
+            cout<<"\ndata found"; 
+            return; 
+        }    
+        else if(temp->key > data) 
+        temp=temp->left;
+        else 
+        temp=temp->right; 
+    } 
+    cout<<"\nData not found"; 
+    return; 
+} 
+int maxDepth(node* node ) 
+{ 
+    if (node ==NULL) 
+    return 0; 
+    else 
+    { 
+        int lDepth = maxDepth(node -> left); 
+        int rDepth = maxDepth(node -> right ); 
+        if (lDepth > rDepth) 
+            return (lDepth+1); 
+        else 
+           return(rDepth+1); 
+    }       
+} 
+void printLeafNodes(struct node *root) 
+{
+    if (root == NULL)
+        return;
+    if (root->left == NULL && root->right == NULL)
+    {
+        cout << root->key << " ";
+        return;
+    }
+    printLeafNodes(root->left);
+    printLeafNodes(root->right);
+}
+struct node *insert(struct node *node, int key) 
+{ 
+    if (node == NULL) 
+        return newNode(key); 
+    if(key < node->key) 
+        node->left = insert(node->left, key); 
+    else 
+        node->right = insert(node->right, key); 
+    return node;
+}    
+int main() 
+{ 
+    struct node *root = NULL; 
+    root =insert(root,50); 
+    root =insert(root,30); 
+    root =insert(root,20); 
+    root =insert(root,40); 
+    root =insert(root,70); 
+    root =insert(root,60); 
+    root =insert(root,80); 
+    cout << "\n Searched Node:- "; 
+    search(root); 
+    cout << "\n The maxDepth of tree is:- "<<maxDepth(root)<<endl;
+    cout << "\nLeaf nodes in the tree are: ";
+    printLeafNodes(root);
+} 
