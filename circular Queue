@@ -1,3 +1,4 @@
+
 #include<iostream>
 using namespace std;
 struct Node
@@ -9,22 +10,19 @@ Node*front=NULL;
 Node*rear=NULL;
 void enqueue(int val)
 {
-    if(front==NULL||rear==NULL)
+    Node* newNode = new Node;
+    newNode->data = val;
+    newNode->next = NULL;
+    
+    if (front == NULL || rear == NULL)
     {
-        Node*newNode;
-        newNode=new Node;
-        newNode->data=val;
-        newNode->next=NULL;
-        front=newNode;
-        rear=newNode;
+        front = newNode;
+        rear = newNode;
     }
     else
     {
-        Node*newNode;
-        newNode=new Node;
-        newNode->data=val;
-        rear->next=front;
-        rear=newNode;
+        rear->next = newNode;
+        rear = newNode;
     }
 }
 void dequeue()
@@ -36,16 +34,13 @@ void dequeue()
 }
 void display()
 {
-    Node*ptr;
-    ptr=front;
-    do
+    Node* ptr = front;
+    while (ptr != NULL)
     {
-        cout<<ptr->data<<"";
-        ptr=ptr->next;
+        cout << ptr->data << " ";
+        ptr = ptr->next;
     }
-    while(ptr!=rear->next);
-    cout<<endl;
-    cout<<endl;
+    cout << endl;
 }
 int main(void)
 {
@@ -81,3 +76,4 @@ int main(void)
     while(ch!=4);
     return 0;
 }
+
